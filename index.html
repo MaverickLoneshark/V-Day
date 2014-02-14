@@ -35,16 +35,11 @@ function app() //definition of app 'class'
     function drawTrail() //draws a trail of hearts
     {
         context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
-        
-        return;
     }
     
     function loop() //the main loop of the app
     {
-        if(drag)
-        {
-            drawTrail();
-        }
+        if(drag) { drawTrail(); }
         
         return;
     }
@@ -75,6 +70,13 @@ function app() //definition of app 'class'
     {
         my_x = event.pageX - canvas.offsetLeft;
         my_y = event.pageY - canvas.offsetTop;
+        
+        var touches = event.changedTouches;
+        if(touches)
+        {
+            my_x = touches[0].pageX - canvas.offsetLeft;
+            my_y = touches[0].pageY - canvas.offsetTop;
+        }
         
         return;
     }
