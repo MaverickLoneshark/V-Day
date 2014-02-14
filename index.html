@@ -3,10 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Please Test Me...</title>
-
 <script>
 //By Terry Sperringer via Notepad++
-/* globals */
+/** globals **/
 var VD; //handle to app -to be initialized with a new instance
 
 function app() //definition of app 'class'
@@ -16,7 +15,11 @@ function app() //definition of app 'class'
     var my_y;
     var FPS = 50; //Frames Per Second...maybe we'll add animation or other time-based things later
     var drag = false;
-    var canvas = document.getElementById(my_canvas); //canvas handle
+    var canvas = document.getElementById('my_canvas'); //canvas handle
+        //touch event handlers
+        canvas.addEventListener("touchstart", this.dragOn, false);
+        canvas.addEventListener("touchend", this.dragOff, false);
+        canvas.addEventListener("touchmove", this.translateCoords, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -24,10 +27,7 @@ function app() //definition of app 'class'
         background.src = "happy_vday.png";
     var name = getUrlVars()["name"];
     
-    if(getUrlVars()["name"] == undefined) //grabs the url variable, "name"
-    {
-        name = "Meghan";
-    }
+    if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
     setInterval(loop, 1000 / FPS); //the loop will repeat every 1000 / FPS ms
     
@@ -73,8 +73,8 @@ function app() //definition of app 'class'
     
     this.translateCoords = function(event) //translates from page coordinates to canvas coordinates
     {
-        my_x = event.pageX - my_canvas.offsetLeft;
-        my_y = event.pageY - my_canvas.offsetTop;
+        my_x = event.pageX - canvas.offsetLeft;
+        my_y = event.pageY - canvas.offsetTop;
         
         return;
     }
@@ -88,12 +88,11 @@ function app() //definition of app 'class'
 </script>
 </head>
 
-<body style="background-color:#ff9999" onload="VD = new app();" onmousedown="VD.dragOn();" touchstart="VD.dragOn();" onmouseup="VD.dragOff();" touchend="VD.dragOff();">
-    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousemove="VD.translateCoords(event);" touchmove="VD.translateCoords(event);">
+<body style="background-color:#ff9999" onload="VD = new app();" onmousedown="VD.dragOn();" onmouseup="VD.dragOff();">
+    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousemove="VD.translateCoords(event);">
         Your browser doesn't support the canvas tag and is incompatible. Try Firefox or Chrome =P
     </canvas>
     <br />
-
     <button onclick="VD.refresh();">Clear Canvas</button>
 </body>
 </html>
