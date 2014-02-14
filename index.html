@@ -74,6 +74,7 @@ function app() //definition of app 'class'
         var touches = event.changedTouches;
         if(touches)
         {
+        alert("Touched by: " + touches);
             my_x = touches[0].pageX - canvas.offsetLeft;
             my_y = touches[0].pageY - canvas.offsetTop;
         }
