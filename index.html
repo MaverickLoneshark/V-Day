@@ -17,9 +17,9 @@ function app() //definition of app 'class'
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
-        canvas.addEventListener("touchstart", this.dragOn, false);
-        canvas.addEventListener("touchend", this.dragOff, false);
-        canvas.addEventListener("touchmove", this.translateCoords, false);
+        canvas.addEventListener('touchstart', this.dragOn, false);
+        canvas.addEventListener('touchend', this.dragOff, false);
+        canvas.addEventListener('touchmove', this.translateCoords, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -29,6 +29,7 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
+    document.body.addEventListener('touchmove', function(event){ event.preventDefault(); }, false); //'scrolling' lock
     setInterval(loop, 1000 / FPS); //the loop will repeat every 1000 / FPS ms
     
     /** private methods **/
@@ -74,7 +75,6 @@ function app() //definition of app 'class'
         var touches = event.changedTouches;
         if(touches)
         {
-        alert("Touched by: " + touches);
             my_x = touches[0].pageX - canvas.offsetLeft;
             my_y = touches[0].pageY - canvas.offsetTop;
         }
