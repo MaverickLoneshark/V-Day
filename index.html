@@ -18,7 +18,7 @@ function app() //definition of app 'class'
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
-        canvas.addEventListener('touchstart', function(that){ that.dragOn(); }, false);
+        canvas.addEventListener('touchstart', function(that){ that.dragOn(); alert(that); }, false);
         canvas.addEventListener('touchend', function(that){ that.dragoff(); }, false);
         canvas.addEventListener('touchmove', function(that){that.translateCoords(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
