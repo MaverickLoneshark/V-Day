@@ -11,16 +11,15 @@ var VD; //handle to app -to be initialized with a new instance
 function app() //definition of app 'class'
 {
     /** private members **/
-    var that = this;
     var my_x;
     var my_y;
     var FPS = 50; //Frames Per Second...maybe we'll add animation or other time-based things later
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
-        canvas.addEventListener('touchstart', function(that){ /*that.dragOn();*/ alert(that); }, false);
-        canvas.addEventListener('touchend', function(that){ that.dragOff(); }, false);
-        canvas.addEventListener('touchmove', function(that){that.translateCoords(); }, false);
+        canvas.addEventListener('touchstart', function(){ VD.dragOn(); }, false);
+        canvas.addEventListener('touchend', function(){ VD.dragOff(); }, false);
+        canvas.addEventListener('touchmove', function(){ VD.translateCoords(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
