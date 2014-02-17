@@ -19,7 +19,7 @@ function app() //definition of app 'class'
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
         canvas.addEventListener('touchstart', function(that){ that.dragOn(); alert(that); }, false);
-        canvas.addEventListener('touchend', function(that){ that.dragoff(); }, false);
+        canvas.addEventListener('touchend', function(that){ that.dragOff(); }, false);
         canvas.addEventListener('touchmove', function(that){that.translateCoords(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
