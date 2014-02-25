@@ -29,6 +29,8 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
+    document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
+    
     /** private methods **/
     function getUrlVars() //method used to obtain url variables
     {
