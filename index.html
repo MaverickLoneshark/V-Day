@@ -18,8 +18,7 @@ function app() //definition of app 'class'
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
         canvas.addEventListener('touchstart', function(){ VD.dragOn(); }, false);
-        canvas.addEventListener('touchend', function(){ VD.dragOff(); }, false);
-        canvas.addEventListener('touchmove', function(){ VD.drawTrail(); }, false);
+        //canvas.addEventListener('touchmove', function(){ VD.drawTrail(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -29,6 +28,7 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
+    document.addEventListener('touchend', function(){ VD.drawTrail(); }, false);
     document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
     
     /** private methods **/
@@ -94,8 +94,8 @@ function app() //definition of app 'class'
 </script>
 </head>
 
-<body style="background-color:#ff9999" onload="VD = new app();">
-    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousedown="VD.dragOn();" onmousemove="VD.drawTrail(event);" onmouseup="VD.dragOff();">
+<body style="background-color:#ff9999" onload="VD = new app();" onmouseup="VD.dragOff();">
+    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousedown="VD.dragOn();" onmousemove="VD.drawTrail(event);">
         Your browser doesn't support the canvas tag and is incompatible. Try Firefox or Chrome =P
     </canvas>
     <br />
