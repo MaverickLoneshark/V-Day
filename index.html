@@ -13,13 +13,12 @@ function app() //definition of app 'class'
     /** private members **/
     var my_x;
     var my_y;
-    var FPS = 50; //Frames Per Second...maybe we'll add animation or other time-based things later
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
         canvas.addEventListener('touchstart', function(){ VD.dragOn(); }, false);
         canvas.addEventListener('touchend', function(){ VD.dragOff(); }, false);
-        canvas.addEventListener('touchmove', function(){ VD.translateCoords(); }, false);
+        canvas.addEventListener('touchmove', function(){ VD.drawTrail(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -29,21 +28,7 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
-    setInterval(loop, 1000 / FPS); //the loop will repeat every 1000 / FPS ms
-    
     /** private methods **/
-    function drawTrail() //draws a trail of hearts
-    {
-        context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
-    }
-    
-    function loop() //the main loop of the app
-    {
-        if(drag) { drawTrail(); }
-        
-        return;
-    }
-    
     function getUrlVars() //method used to obtain url variables
     {
         var vars = {};
@@ -54,18 +39,7 @@ function app() //definition of app 'class'
         return vars;
     }
     
-    /** public methods **/
-    this.refresh = function() //overwrites canvas with background graphics: an image and name
-    {
-        context.drawImage(background, 0, 0);
-        context.fillStyle = "rgb(255, 0, 0)";
-        context.font = "36px Brush Script MT"; //"30px Arial";
-        context.fillText(name + '!', 150, 170);
-        
-        return;
-    }
-    
-    this.translateCoords = function(event) //translates from page coordinates to canvas coordinates
+    function translateCoords(event) //translates from page coordinates to canvas coordinates
     {
         my_x = event.pageX - canvas.offsetLeft;
         my_y = event.pageY - canvas.offsetTop;
@@ -80,6 +54,28 @@ function app() //definition of app 'class'
         return;
     }
     
+    /** public methods **/
+    this.refresh = function() //overwrites canvas with background graphics: an image and name
+    {
+        context.drawImage(background, 0, 0);
+        context.fillStyle = "rgb(255, 0, 0)";
+        context.font = "36px Brush Script MT"; //"30px Arial";
+        context.fillText(name + '!', 150, 170);
+        
+        return;
+    }
+    
+    this.drawTrail = function(event) //draws a trail of hearts
+    {
+        if(drag)
+        {
+            translateCoords(event);
+            context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
+        }
+        
+        return;
+    }
+    
     this.dragOn = function(){ drag = true; } //drag on (here be drag-on's)
     
     this.dragOff = function(){ drag = false; } //drag off (slurred pittsburgh-ese insult)
@@ -89,8 +85,8 @@ function app() //definition of app 'class'
 </script>
 </head>
 
-<body style="background-color:#ff9999" onload="VD = new app();" onmousedown="VD.dragOn();" onmouseup="VD.dragOff();">
-    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousemove="VD.translateCoords(event);">
+<body style="background-color:#ff9999" onload="VD = new app();">
+    <canvas id="my_canvas" width="400" height="300" style="background-color:#000000; border:1px solid #000000;" onmousedown="VD.dragOn();" onmousemove="VD.drawTrail(event);" onmouseup="VD.dragOff();">
         Your browser doesn't support the canvas tag and is incompatible. Try Firefox or Chrome =P
     </canvas>
     <br />
