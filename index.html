@@ -17,8 +17,9 @@ function app() //definition of app 'class'
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
-        canvas.addEventListener('touchstart', function(){ VD.dragOn(); }, false);
-        //canvas.addEventListener('touchmove', function(){ VD.drawTrail(); }, false);
+        canvas.addEventListener('touchstart', function(){ VD.drawTrail(); }, false);
+        canvas.addEventListener('touchmove', function(){ VD.drawTrail(); }, false);
+        canvas.addEventListener('touchend', function(){ VD.drawTrail(); }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -28,7 +29,6 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
-    document.addEventListener('touchend', function(){ VD.drawTrail(); }, false);
     document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
     
     /** private methods **/
@@ -63,23 +63,20 @@ function app() //definition of app 'class'
     
     this.drawTrail = function(event) //draws a trail of hearts
     {
-        if(drag)
+        if(event.ChangedTouches)
         {
-            if(event.ChangedTouches)
+            var touches = event.ChangedTouches;
+            for(var i = 0; i < touches; i++)
             {
-                var touches = event.ChangedTouches;
-                for(var i = 0; i < touches; i++)
-                {
-                    my_x = touches[i].pageX - canvas.offsetLeft;
-                    my_y = touches[i].pageY - canvas.offsetTop;
-                    context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
-                }
-            }
-            else
-            {
-                translateCoords(event);
+                my_x = touches[i].pageX - canvas.offsetLeft;
+                my_y = touches[i].pageY - canvas.offsetTop;
                 context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
             }
+        }
+        else if(drag)
+        {
+            translateCoords(event);
+            context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
         }
         
         return;
