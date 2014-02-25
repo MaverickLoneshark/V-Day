@@ -44,13 +44,6 @@ function app() //definition of app 'class'
         my_x = event.pageX - canvas.offsetLeft;
         my_y = event.pageY - canvas.offsetTop;
         
-        var touches = event.changedTouches;
-        if(touches)
-        {
-            my_x = touches[0].pageX - canvas.offsetLeft;
-            my_y = touches[0].pageY - canvas.offsetTop;
-        }
-        
         return;
     }
     
@@ -69,8 +62,21 @@ function app() //definition of app 'class'
     {
         if(drag)
         {
-            translateCoords(event);
-            context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
+            if(event.ChangedTouches)
+            {
+                var touches = event.ChangedTouches;
+                for(var i = 0; i < touches; i++)
+                {
+                    my_x = touches[i].pageX - canvas.offsetLeft;
+                    my_y = touches[i].pageY - canvas.offsetTop;
+                    context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
+                }
+            }
+            else
+            {
+                translateCoords(event);
+                context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
+            }
         }
         
         return;
