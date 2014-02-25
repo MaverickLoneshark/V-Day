@@ -66,12 +66,12 @@ function app() //definition of app 'class'
         if(event.ChangedTouches)
         {
             var touches = event.ChangedTouches;
-            for(var i = 0; i < touches; i++)
-            {
-                my_x = touches[i].pageX - canvas.offsetLeft;
-                my_y = touches[i].pageY - canvas.offsetTop;
+            //for(var i = 0; i < touches; i++)
+            //{
+                my_x = touches[0].pageX - canvas.offsetLeft;
+                my_y = touches[0].pageY - canvas.offsetTop;
                 context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
-            }
+            //}
         }
         else if(drag)
         {
