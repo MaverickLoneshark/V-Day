@@ -17,9 +17,9 @@ function app() //definition of app 'class'
     var drag = false;
     var canvas = document.getElementById('my_canvas'); //canvas handle
         //touch event handlers
-        canvas.addEventListener('touchstart', function(event){ VD.drawTrail(event); }, false);
-        canvas.addEventListener('touchmove', function(event){ VD.drawTrail(event); }, false);
-        canvas.addEventListener('touchend', function(event){ VD.drawTrail(event); }, false);
+        canvas.addEventListener('touchstart', VD.drawTrail(event)/*function(event){ VD.drawTrail(event);*/ }, false);
+        canvas.addEventListener('touchmove', VD.drawTrail(event)/*function(event){ VD.drawTrail(event);*/ }, false);
+        canvas.addEventListener('touchend', VD.drawTrail(event)/*function(event){ VD.drawTrail(event);*/ }, false);
     var context = my_canvas.getContext("2d"); //controls canvas 'modes'
     var heart = new Image();
         heart.src = "small_heart.gif";
@@ -29,7 +29,7 @@ function app() //definition of app 'class'
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
     
-    document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
+    //document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
     
     /** private methods **/
     function getUrlVars() //method used to obtain url variables
@@ -63,12 +63,10 @@ function app() //definition of app 'class'
     
     this.drawTrail = function(event) //draws a trail of hearts
     {
-var debug = document.getElementById('DEBUG');
-debug.innerHTML = event.targetTouches;
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
-debug.innerHTML = touches.length;
+            
             for(var i = 0; i < touches.length; i++)
             {
                 my_x = touches[i].pageX - canvas.offsetLeft;
@@ -100,6 +98,5 @@ debug.innerHTML = touches.length;
     </canvas>
     <br />
     <button onclick="VD.refresh();">Clear Canvas</button>
-    <p id="DEBUG">debug info</p>
 </body>
 </html>
