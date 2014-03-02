@@ -64,17 +64,17 @@ function app() //definition of app 'class'
     this.drawTrail = function(event) //draws a trail of hearts
     {
 var debug = document.getElementById('DEBUG');
-debug.innerHtml = event.targetTouches;
+debug.innerHTML = event.targetTouches;
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
-debug.innerHtml = touches.length;
-            //for(var i = 0; i < touches.length; i++)
-            //{
-                my_x = touches[0].pageX - canvas.offsetLeft;
-                my_y = touches[0].pageY - canvas.offsetTop;
+debug.innerHTML = touches.length;
+            for(var i = 0; i < touches.length; i++)
+            {
+                my_x = touches[i].pageX - canvas.offsetLeft;
+                my_y = touches[i].pageY - canvas.offsetTop;
                 context.drawImage(heart, my_x - (heart.width >> 1), my_y - (heart.height >> 1));
-            //}
+            }
         }
         else if(drag)
         {
