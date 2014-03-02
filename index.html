@@ -63,6 +63,8 @@ function app() //definition of app 'class'
     
     this.drawTrail = function(event) //draws a trail of hearts
     {
+        event.preventDefault();
+        
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
