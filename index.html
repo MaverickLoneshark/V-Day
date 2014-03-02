@@ -63,10 +63,11 @@ function app() //definition of app 'class'
     
     this.drawTrail = function(event) //draws a trail of hearts
     {
+var debug = document.getElementById('DEBUG');
+debug.innerHtml = event.targetTouches;
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
-var debug = document.getElementById('DEBUG');
 debug.innerHtml = touches.length;
             //for(var i = 0; i < touches.length; i++)
             //{
