@@ -66,7 +66,9 @@ function app() //definition of app 'class'
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
-            //for(var i = 0; i < touches; i++)
+var debug = document.getElementById('DEBUG');
+debug.innerHtml = touches.length;
+            //for(var i = 0; i < touches.length; i++)
             //{
                 my_x = touches[0].pageX - canvas.offsetLeft;
                 my_y = touches[0].pageY - canvas.offsetTop;
@@ -97,5 +99,6 @@ function app() //definition of app 'class'
     </canvas>
     <br />
     <button onclick="VD.refresh();">Clear Canvas</button>
+    <p id="DEBUG">debug info</p>
 </body>
 </html>
