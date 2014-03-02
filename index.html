@@ -63,9 +63,9 @@ function app() //definition of app 'class'
     
     this.drawTrail = function(event) //draws a trail of hearts
     {
-        if(event.ChangedTouches)
+        if(event.changedTouches)
         {
-            var touches = event.ChangedTouches;
+            var touches = event.changedTouches;
             //for(var i = 0; i < touches; i++)
             //{
                 my_x = touches[0].pageX - canvas.offsetLeft;
