@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <title>Please Test Me...</title>
 <script>
@@ -28,8 +28,6 @@ function app() //definition of app 'class'
     var name = getUrlVars()["name"];
     
     if(getUrlVars()["name"] == undefined) { name = "Meghan"; } //grabs the url variable, "name"
-    
-    //document.addEventListener('touchmove', function(event){ event.preventDefault(); }, false);
     
     /** private methods **/
     function getUrlVars() //method used to obtain url variables
@@ -68,7 +66,6 @@ function app() //definition of app 'class'
         if(event.targetTouches)
         {
             var touches = event.targetTouches;
-            
             for(var i = 0; i < touches.length; i++)
             {
                 my_x = touches[i].pageX - canvas.offsetLeft;
