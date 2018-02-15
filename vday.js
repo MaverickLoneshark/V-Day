@@ -7,6 +7,7 @@
 	body.onload = function() {
 		VD = new VDay();
 		body.onmouseup = VD.dragOff;
+		body.onscroll = function(){ event.preventDefault(); };
 		
 		return;
 	};
@@ -44,8 +45,6 @@
 		
 		function drawTrail(event) {
 			var touches;
-			
-			event.preventDefault();
 			
 			if(event.targetTouches) {
 				touches = event.targetTouches;
