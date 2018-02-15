@@ -78,8 +78,8 @@
 		clear_button.onclick = function refresh() {
 			context.drawImage(background, 0, 0);
 			context.fillStyle = "rgb(255, 0, 0)";
-			context.font = "36px Brush Script MT"; //"30px Arial";
-			context.fillText(name + '!', 150, 170);
+			context.font = "50px Brush Script MT";
+			context.fillText(name + '!', canvas.width >> 1, canvas.height * 2 / 3);
 			
 			return;
 		}
