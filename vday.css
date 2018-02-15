@@ -9,4 +9,5 @@ div#canvas-div {
 canvas#my_canvas {
 	background-color:#000000;
 	border:1px solid #000000;
+	border-radius: 5px;
 }
